@@ -1,0 +1,24 @@
+# Smartboy Management
+
+> East Africa's premier record label and talent management house, based in Nairobi, Kenya. Founded in 2020 by Peter Ombati. Partnered with Warner Music Africa, Virgin Music Group and ACTS Music Group.
+
+Smartboy Management develops and represents African recording artists across Afro-fusion, Afrobeats, hip-hop, drill, trap and R&B. Services span recording & production, talent management, digital distribution, PR & media, brand partnerships, touring, publishing & sync, and content production.
+
+## Roster
+- Dalla Stains — Singer/Songwriter, Afro-Soul & R&B (Nairobi)
+- Nova Flow Boyz — 4-member group, Hip-Hop & Trap (Nairobi)
+- 50Boyz — Collective, Gengetone & Drill (Kenya)
+- Mr Handsome KE — Solo artist, Afro-pop & Dance (Kenya)
+
+## Partners
+- Warner Music Africa — Global label partner
+- Virgin Music Group — International distribution
+- ACTS Music Group — Distribution & publishing
+
+## Pages
+- [Home](/): Label overview, roster, services, releases, partners and contact
+- [About](/#about): Story, mission and stats
+- [Leadership](/#leadership): Peter Ombati, Founder & CEO
+- [Services](/#services): Recording, management, distribution, PR, brand, touring, publishing, content
+- [Releases](/#releases): Latest singles, EPs and albums
+- [Contact](/#contact): Demo submissions, bookings, partnerships
