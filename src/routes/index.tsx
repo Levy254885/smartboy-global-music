@@ -50,10 +50,15 @@ const RELEASES = [
   { n: "05", title: "Smartboy Compilation", artist: "Various Artists", meta: "Album · 2023", badge: "Label" },
 ];
 
+import actsLogo from "../assets/acts-music-group.jpg.asset.json";
+import warnerLogo from "../assets/warner-music-africa.jpg.asset.json";
+import virginLogo from "../assets/virgin-music-group.jpg.asset.json";
+import smartboyLogo from "../assets/smartboy-logo.jpg.asset.json";
+
 const PARTNERS = [
-  { name: "ACTS Music Group", role: "Distribution · Publishing" },
-  { name: "Virgin Music Group", role: "Global Label Partner" },
-  { name: "ONErpm", role: "Digital Distribution" },
+  { name: "ACTS Music Group", role: "Distribution · Publishing", logo: actsLogo.url },
+  { name: "Warner Music Africa", role: "Global Label Partner", logo: warnerLogo.url },
+  { name: "Virgin Music Group", role: "International Distribution", logo: virginLogo.url },
 ];
 
 /* ----------------------------- HELPERS ----------------------------- */
@@ -137,22 +142,15 @@ function Ticker({
 /* ------------------------------ NAV ------------------------------ */
 
 function Logo({ dark = false }: { dark?: boolean }) {
-  // W-style mark inspired by WMG circle
   return (
-    <div className="flex items-center gap-3">
-      <div
-        className="flex h-11 w-11 items-center justify-center rounded-full"
-        style={{ background: dark ? "#000" : "#fff", color: dark ? "#fff" : "#000" }}
-      >
-        <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M3 5l3 14 3-10 3 10 3-10 3 10 3-14" />
-        </svg>
-      </div>
-      <div className="leading-[0.95]">
-        <div className="text-[11px] font-black tracking-[0.12em]" style={{ color: dark ? "#000" : "#fff" }}>SMARTBOY</div>
-        <div className="text-[11px] font-black tracking-[0.12em]" style={{ color: dark ? "#000" : "#fff" }}>MANAGEMENT</div>
-      </div>
-    </div>
+    <img
+      src={smartboyLogo.url}
+      alt="Smartboy Management — East Africa's Premier Record Label"
+      className="h-10 md:h-12 w-auto rounded-sm"
+      style={{ background: "#000", padding: "2px 6px", filter: dark ? "invert(0)" : "none" }}
+      width={320}
+      height={80}
+    />
   );
 }
 
