@@ -669,11 +669,18 @@ function SmartboyHome() {
             {PARTNERS.map((p) => (
               <div
                 key={p.name}
-                className="reveal flex flex-col items-center justify-center gap-3 p-10"
-                style={{ background: "var(--background)" }}
+                className="reveal flex flex-col items-center justify-center gap-5 p-10 transition-transform hover:scale-[1.02]"
+                style={{ background: "#fff" }}
               >
-                <div className="headline text-2xl md:text-3xl">{p.name}</div>
-                <div className="text-[11px] font-semibold uppercase tracking-[0.22em] opacity-50">{p.role}</div>
+                <img
+                  src={p.logo}
+                  alt={`${p.name} — partner of Smartboy Management`}
+                  className="h-20 md:h-24 w-auto object-contain"
+                  loading="lazy"
+                  width={240}
+                  height={120}
+                />
+                <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-black/50">{p.role}</div>
               </div>
             ))}
           </div>
