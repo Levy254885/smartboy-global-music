@@ -53,13 +53,27 @@ const RELEASES = [
 import actsLogo from "../assets/acts-music-group.jpg.asset.json";
 import warnerLogo from "../assets/warner-music-africa.jpg.asset.json";
 import virginLogo from "../assets/virgin-music-group.jpg.asset.json";
-import smartboyLogo from "../assets/smartboy-logo.jpg.asset.json";
+import smartboyLogo from "../assets/smartboy-logo-v2.png.asset.json";
 
 const PARTNERS = [
   { name: "ACTS Music Group", role: "Distribution · Publishing", logo: actsLogo.url },
   { name: "Warner Music Africa", role: "Global Label Partner", logo: warnerLogo.url },
   { name: "Virgin Music Group", role: "International Distribution", logo: virginLogo.url },
 ];
+
+// WhatsApp destination for contact form submissions
+const WHATSAPP_NUMBER = "254700000000"; // international format, no +
+
+const SERVICE_ICONS: Record<string, string> = {
+  "Recording & Production": "M9 18V5l12-2v13M9 9l12-2M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm15-3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+  "Talent Management": "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm13 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75",
+  "Digital Distribution": "M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07",
+  "PR & Media": "M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6",
+  "Brand Partnerships": "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z",
+  "Touring & Events": "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0zm-9 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+  "Publishing & Sync": "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z",
+  "Content Production": "M23 7l-7 5 7 5V7zM14 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z",
+};
 
 /* ----------------------------- HELPERS ----------------------------- */
 
@@ -142,14 +156,16 @@ function Ticker({
 /* ------------------------------ NAV ------------------------------ */
 
 function Logo({ dark = false }: { dark?: boolean }) {
+  // logo is white-on-transparent; invert when on light background
   return (
     <img
       src={smartboyLogo.url}
       alt="Smartboy Management — East Africa's Premier Record Label"
-      className="h-10 md:h-12 w-auto rounded-sm"
-      style={{ background: "#000", padding: "2px 6px", filter: dark ? "invert(0)" : "none" }}
+      className="h-8 md:h-10 w-auto select-none"
+      style={{ filter: dark ? "invert(1)" : "none" }}
       width={320}
       height={80}
+      draggable={false}
     />
   );
 }
@@ -159,29 +175,18 @@ function ThemeToggle({ dark, onToggle }: { dark: boolean; onToggle: () => void }
     <button
       onClick={onToggle}
       aria-label="Toggle theme"
-      className="relative flex h-10 w-[78px] items-center rounded-full border p-1 transition"
-      style={{ borderColor: dark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.2)", background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)" }}
+      className="flex h-9 w-9 items-center justify-center rounded-full border transition hover:scale-105"
+      style={{
+        borderColor: dark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.15)",
+        background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+        color: "var(--foreground)",
+      }}
     >
-      <span
-        className="absolute top-1 flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300"
-        style={{
-          left: dark ? "calc(100% - 36px)" : "4px",
-          background: "#fff",
-          color: "#000",
-        }}
-      >
-        {dark ? (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        ) : (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        )}
-      </span>
-      <span className="ml-2 opacity-50">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="4"/></svg>
-      </span>
-      <span className="ml-auto mr-2 opacity-50">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </span>
+      {dark ? (
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      ) : (
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      )}
     </button>
   );
 }
@@ -191,21 +196,19 @@ function MenuButton({ open, onClick, dark }: { open: boolean; onClick: () => voi
     <button
       onClick={onClick}
       aria-label="Menu"
-      className="relative flex h-11 w-11 flex-col items-center justify-center gap-1.5"
+      className="relative flex h-9 w-9 flex-col items-center justify-center gap-[5px] rounded-full border xl:hidden"
+      style={{
+        borderColor: dark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.15)",
+        background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+      }}
     >
       <span
-        className="block h-[2px] w-6 transition-all"
-        style={{
-          background: dark ? "#fff" : "#000",
-          transform: open ? "rotate(45deg) translate(4px,5px)" : "none",
-        }}
+        className="block h-[1.5px] w-4 transition-all"
+        style={{ background: "var(--foreground)", transform: open ? "rotate(45deg) translate(3px,4px)" : "none" }}
       />
       <span
-        className="block h-[2px] w-6 transition-all"
-        style={{
-          background: dark ? "#fff" : "#000",
-          transform: open ? "rotate(-45deg) translate(4px,-5px)" : "none",
-        }}
+        className="block h-[1.5px] w-4 transition-all"
+        style={{ background: "var(--foreground)", transform: open ? "rotate(-45deg) translate(3px,-4px)" : "none" }}
       />
     </button>
   );
