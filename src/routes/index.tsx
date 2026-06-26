@@ -530,48 +530,64 @@ function SmartboyHome() {
       <Ticker bg="var(--pink)" color="#000" reverse items={["MUSIC WITHOUT LIMITS", "MUSIC WITHOUT LIMITS"]} />
 
       {/* ============= SERVICES ============= */}
-      <section id="services" className="px-5 py-24 md:px-8 md:py-32">
-        <div className="mx-auto grid max-w-[1400px] gap-16 md:grid-cols-12">
-          <div className="reveal md:col-span-4">
-            <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--cyan)" }}>
-              What We Do
-            </p>
-            <h2 className="headline text-[clamp(2.4rem,5.5vw,4.5rem)]">
-              FULL-SPECTRUM <span style={{ color: "var(--yellow)" }}>SUPPORT</span>.
-            </h2>
-            <p className="mt-6 max-w-sm text-base leading-relaxed opacity-70">
-              From signing to stardom, we provide everything an artist needs to build a sustainable, powerful
-              career in the music industry.
+      <section id="services" className="px-5 py-24 md:px-8 md:py-32" style={{ background: "var(--background)" }}>
+        <div className="mx-auto max-w-[1400px]">
+          <div className="reveal mb-14 flex flex-wrap items-end justify-between gap-8">
+            <div className="max-w-xl">
+              <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--cyan)" }}>
+                What We Do
+              </p>
+              <h2 className="headline text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.02em]">
+                FULL-SPECTRUM <span style={{ color: "var(--yellow)" }}>SUPPORT</span>.
+              </h2>
+            </div>
+            <p className="max-w-sm text-[15px] leading-relaxed opacity-70">
+              From signing to stardom — we provide every tool an artist needs to build a sustainable, powerful career.
             </p>
           </div>
 
-          <div className="md:col-span-8">
-            <div className="grid grid-cols-1 gap-px sm:grid-cols-2" style={{ background: "var(--border)" }}>
-              {SERVICES.map((s, i) => (
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {SERVICES.map((s, i) => (
+              <article
+                key={s.name}
+                className="reveal group relative flex flex-col overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_-20px_rgba(83,243,243,0.35)]"
+                style={{
+                  borderColor: "var(--border)",
+                  background: "linear-gradient(180deg, var(--surface) 0%, var(--background) 100%)",
+                }}
+              >
                 <div
-                  key={s.name}
-                  className="reveal group p-7 transition-colors md:p-9"
-                  style={{ background: "var(--background)" }}
-                >
-                  <div className="mb-6 flex items-center justify-between">
-                    <span className="text-[11px] font-bold tracking-[0.22em] opacity-50">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span
-                      className="transition-transform group-hover:translate-x-1"
-                      style={{ color: "var(--cyan)" }}
-                    >
-                      →
-                    </span>
+                  className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-40"
+                  style={{ background: i % 3 === 0 ? "var(--cyan)" : i % 3 === 1 ? "var(--pink)" : "var(--yellow)" }}
+                />
+                <div className="mb-6 flex items-center justify-between">
+                  <div
+                    className="flex h-12 w-12 items-center justify-center rounded-xl border transition-colors group-hover:border-transparent"
+                    style={{
+                      borderColor: "var(--border)",
+                      background: "var(--background)",
+                      color: i % 3 === 0 ? "var(--cyan)" : i % 3 === 1 ? "var(--pink)" : "var(--yellow)",
+                    }}
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={SERVICE_ICONS[s.name] || "M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"} />
+                    </svg>
                   </div>
-                  <h3 className="headline text-[clamp(1.4rem,2.2vw,1.9rem)]">{s.name}</h3>
-                  <p className="mt-3 max-w-sm text-sm leading-relaxed opacity-70">{s.desc}</p>
+                  <span className="text-[10px] font-bold tracking-[0.22em] opacity-40">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                 </div>
-              ))}
-            </div>
+                <h3 className="headline text-[1.35rem] leading-tight md:text-[1.5rem]">{s.name}</h3>
+                <p className="mt-3 text-[14px] leading-relaxed opacity-70">{s.desc}</p>
+                <div className="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] opacity-60 transition-opacity group-hover:opacity-100">
+                  Learn more <span className="transition-transform group-hover:translate-x-1">→</span>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
+
 
       {/* ============= RELEASES ============= */}
       <section id="releases" className="px-5 py-24 md:px-8 md:py-32" style={{ background: "var(--ink)" }}>
