@@ -399,7 +399,7 @@ function SmartboyHome() {
               <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--yellow)" }}>
                 The Roster
               </p>
-              <h2 className="headline text-[clamp(2.8rem,8vw,6.5rem)]">
+              <h2 className="headline text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.02em]">
                 BUILDING <span style={{ color: "var(--cyan)" }}>STARS</span>.
               </h2>
             </div>
@@ -425,7 +425,7 @@ function SmartboyHome() {
             <p className="mb-4 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--cyan)" }}>
               Our Story
             </p>
-            <h2 className="headline text-[clamp(2.6rem,7vw,6rem)]">
+            <h2 className="headline text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.02em]">
               THE SOUND OF
               <br />
               <span style={{ color: "var(--pink)" }}>EAST AFRICA.</span>
@@ -472,7 +472,7 @@ function SmartboyHome() {
             <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--yellow)" }}>
               Leadership
             </p>
-            <h2 className="headline text-[clamp(2.6rem,7vw,6rem)]">THE VISIONARY.</h2>
+            <h2 className="headline text-[clamp(2rem,5vw,4rem)] leading-[0.95] tracking-[-0.02em]">THE VISIONARY.</h2>
           </div>
           <div className="grid gap-12 md:grid-cols-12">
             <div className="reveal md:col-span-5">
@@ -581,7 +581,7 @@ function SmartboyHome() {
               <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--pink)" }}>
                 Discography
               </p>
-              <h2 className="headline text-[clamp(2.6rem,7vw,6rem)]">
+              <h2 className="headline text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.02em]">
                 LATEST <span style={{ color: "var(--pink)" }}>RELEASES</span>.
               </h2>
             </div>
@@ -624,7 +624,7 @@ function SmartboyHome() {
             <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--cyan)" }}>
               Get In Touch
             </p>
-            <h2 className="headline text-[clamp(2.6rem,7vw,5.5rem)]">
+            <h2 className="headline text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.02em]">
               READY TO BUILD
               <br />
               SOMETHING <span style={{ color: "var(--yellow)" }}>LEGENDARY?</span>
