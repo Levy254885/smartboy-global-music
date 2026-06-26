@@ -962,7 +962,7 @@ function Field({
         name={name}
         type={type}
         placeholder={placeholder}
-        className="border-0 border-b bg-transparent py-3 text-base font-medium outline-none transition focus:border-[var(--cyan)]"
+        className="rounded-xl border bg-transparent px-4 py-3 text-[15px] font-medium outline-none transition focus:border-[var(--cyan)]"
         style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
       />
     </div>
