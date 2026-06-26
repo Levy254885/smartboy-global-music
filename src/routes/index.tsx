@@ -53,13 +53,27 @@ const RELEASES = [
 import actsLogo from "../assets/acts-music-group.jpg.asset.json";
 import warnerLogo from "../assets/warner-music-africa.jpg.asset.json";
 import virginLogo from "../assets/virgin-music-group.jpg.asset.json";
-import smartboyLogo from "../assets/smartboy-logo.jpg.asset.json";
+import smartboyLogo from "../assets/smartboy-logo-v2.png.asset.json";
 
 const PARTNERS = [
   { name: "ACTS Music Group", role: "Distribution · Publishing", logo: actsLogo.url },
   { name: "Warner Music Africa", role: "Global Label Partner", logo: warnerLogo.url },
   { name: "Virgin Music Group", role: "International Distribution", logo: virginLogo.url },
 ];
+
+// WhatsApp destination for contact form submissions
+const WHATSAPP_NUMBER = "254700000000"; // international format, no +
+
+const SERVICE_ICONS: Record<string, string> = {
+  "Recording & Production": "M9 18V5l12-2v13M9 9l12-2M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm15-3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+  "Talent Management": "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm13 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75",
+  "Digital Distribution": "M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07",
+  "PR & Media": "M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6",
+  "Brand Partnerships": "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z",
+  "Touring & Events": "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0zm-9 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+  "Publishing & Sync": "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z",
+  "Content Production": "M23 7l-7 5 7 5V7zM14 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z",
+};
 
 /* ----------------------------- HELPERS ----------------------------- */
 
@@ -142,14 +156,16 @@ function Ticker({
 /* ------------------------------ NAV ------------------------------ */
 
 function Logo({ dark = false }: { dark?: boolean }) {
+  // logo is white-on-transparent; invert when on light background
   return (
     <img
       src={smartboyLogo.url}
       alt="Smartboy Management — East Africa's Premier Record Label"
-      className="h-10 md:h-12 w-auto rounded-sm"
-      style={{ background: "#000", padding: "2px 6px", filter: dark ? "invert(0)" : "none" }}
+      className="h-8 md:h-10 w-auto select-none"
+      style={{ filter: dark ? "invert(1)" : "none" }}
       width={320}
       height={80}
+      draggable={false}
     />
   );
 }
@@ -159,29 +175,18 @@ function ThemeToggle({ dark, onToggle }: { dark: boolean; onToggle: () => void }
     <button
       onClick={onToggle}
       aria-label="Toggle theme"
-      className="relative flex h-10 w-[78px] items-center rounded-full border p-1 transition"
-      style={{ borderColor: dark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.2)", background: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)" }}
+      className="flex h-9 w-9 items-center justify-center rounded-full border transition hover:scale-105"
+      style={{
+        borderColor: dark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.15)",
+        background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+        color: "var(--foreground)",
+      }}
     >
-      <span
-        className="absolute top-1 flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300"
-        style={{
-          left: dark ? "calc(100% - 36px)" : "4px",
-          background: "#fff",
-          color: "#000",
-        }}
-      >
-        {dark ? (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        ) : (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        )}
-      </span>
-      <span className="ml-2 opacity-50">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="4"/></svg>
-      </span>
-      <span className="ml-auto mr-2 opacity-50">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </span>
+      {dark ? (
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      ) : (
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      )}
     </button>
   );
 }
@@ -191,21 +196,19 @@ function MenuButton({ open, onClick, dark }: { open: boolean; onClick: () => voi
     <button
       onClick={onClick}
       aria-label="Menu"
-      className="relative flex h-11 w-11 flex-col items-center justify-center gap-1.5"
+      className="relative flex h-9 w-9 flex-col items-center justify-center gap-[5px] rounded-full border xl:hidden"
+      style={{
+        borderColor: dark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.15)",
+        background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+      }}
     >
       <span
-        className="block h-[2px] w-6 transition-all"
-        style={{
-          background: dark ? "#fff" : "#000",
-          transform: open ? "rotate(45deg) translate(4px,5px)" : "none",
-        }}
+        className="block h-[1.5px] w-4 transition-all"
+        style={{ background: "var(--foreground)", transform: open ? "rotate(45deg) translate(3px,4px)" : "none" }}
       />
       <span
-        className="block h-[2px] w-6 transition-all"
-        style={{
-          background: dark ? "#fff" : "#000",
-          transform: open ? "rotate(-45deg) translate(4px,-5px)" : "none",
-        }}
+        className="block h-[1.5px] w-4 transition-all"
+        style={{ background: "var(--foreground)", transform: open ? "rotate(-45deg) translate(3px,-4px)" : "none" }}
       />
     </button>
   );
@@ -246,23 +249,30 @@ function SmartboyHome() {
         className="fixed inset-x-0 top-0 z-50 transition-all duration-300"
         style={{
           background: scrolled
-            ? (dark ? "rgba(0,0,0,0.92)" : "rgba(255,255,255,0.95)")
+            ? (dark ? "rgba(8,8,10,0.78)" : "rgba(255,255,255,0.82)")
             : "transparent",
-          backdropFilter: scrolled ? "blur(14px)" : "none",
+          backdropFilter: scrolled ? "saturate(140%) blur(18px)" : "none",
+          WebkitBackdropFilter: scrolled ? "saturate(140%) blur(18px)" : "none",
           borderBottom: scrolled ? `1px solid var(--border)` : "1px solid transparent",
         }}
       >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-3 md:px-8 md:py-4">
-          <a href="#home" aria-label="Smartboy Management home">
+          <a href="#home" aria-label="Smartboy Management home" className="flex items-center">
             <Logo dark={!dark} />
           </a>
 
-          <nav className="hidden xl:flex items-center gap-7">
+          <nav
+            className="hidden lg:flex items-center gap-1 rounded-full border px-1.5 py-1.5"
+            style={{
+              borderColor: dark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.08)",
+              background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)",
+            }}
+          >
             {NAV.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="text-[12px] font-semibold uppercase tracking-[0.18em] transition hover:opacity-60"
+                className="rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] transition hover:bg-[var(--foreground)] hover:text-[var(--background)]"
                 style={{ color: "var(--foreground)" }}
               >
                 {l.label}
@@ -270,7 +280,14 @@ function SmartboyHome() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3 md:gap-4">
+          <div className="flex items-center gap-2.5">
+            <a
+              href="#contact"
+              className="hidden sm:inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] transition hover:opacity-90"
+              style={{ background: "var(--cyan)", color: "#000" }}
+            >
+              Work With Us <span aria-hidden>→</span>
+            </a>
             <ThemeToggle dark={dark} onToggle={() => setLight(!light)} />
             <MenuButton open={menuOpen} onClick={() => setMenuOpen((o) => !o)} dark={dark} />
           </div>
@@ -279,34 +296,44 @@ function SmartboyHome() {
 
       {/* ============= MOBILE / FULL MENU ============= */}
       <div
-        className="fixed inset-0 z-40 transition-all duration-500"
+        className="fixed inset-0 z-40 transition-all duration-500 lg:hidden"
         style={{
-          background: dark ? "#000" : "#fff",
+          background: dark ? "rgba(8,8,10,0.96)" : "rgba(255,255,255,0.98)",
+          backdropFilter: "blur(20px)",
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? "auto" : "none",
         }}
       >
-        <div className="flex h-full flex-col justify-center px-6 md:px-16">
-          <ul className="space-y-4 md:space-y-6">
+        <div className="flex h-full flex-col justify-center px-7 md:px-14">
+          <ul className="space-y-3 md:space-y-4">
             {NAV.map((l, i) => (
-              <li key={l.href}>
+              <li key={l.href} className="overflow-hidden">
                 <a
                   href={l.href}
                   onClick={() => setMenuOpen(false)}
-                  className="headline block text-[clamp(3rem,10vw,7rem)] transition-all hover:translate-x-3 hover:text-[var(--cyan)]"
+                  className="headline block text-[clamp(2.25rem,8vw,4.5rem)] leading-[1.05] transition-all hover:translate-x-2 hover:text-[var(--cyan)]"
                   style={{
-                    transitionDelay: menuOpen ? `${i * 60}ms` : "0ms",
+                    transitionDelay: menuOpen ? `${i * 50}ms` : "0ms",
                     opacity: menuOpen ? 1 : 0,
-                    transform: menuOpen ? "translateY(0)" : "translateY(30px)",
+                    transform: menuOpen ? "translateY(0)" : "translateY(28px)",
                     transitionProperty: "opacity, transform, color",
                   }}
                 >
-                  {l.label}.
+                  <span className="mr-3 align-middle text-[0.45em] opacity-40">0{i + 1}</span>
+                  {l.label}
                 </a>
               </li>
             ))}
           </ul>
-          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-2 text-[12px] font-semibold uppercase tracking-[0.2em] opacity-60">
+          <a
+            href="#contact"
+            onClick={() => setMenuOpen(false)}
+            className="mt-10 inline-flex w-fit items-center gap-3 rounded-full px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.22em]"
+            style={{ background: "var(--cyan)", color: "#000" }}
+          >
+            Work With Us →
+          </a>
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.2em] opacity-60">
             <span>Nairobi · Est. 2020</span>
             <span>hello@smartboymgmt.co</span>
             <span>+254 700 000 000</span>
@@ -315,23 +342,24 @@ function SmartboyHome() {
       </div>
 
       {/* ============= HERO ============= */}
-      <section id="home" className="relative min-h-screen overflow-hidden pt-28 md:pt-36">
+      <section id="home" className="relative min-h-[92vh] overflow-hidden pt-28 md:pt-36">
         <BackgroundLights />
         <div className="relative z-10 mx-auto max-w-[1400px] px-5 md:px-8">
-          <p className="mb-6 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--cyan)" }}>
+          <p className="mb-5 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em]" style={{ color: "var(--cyan)" }}>
+            <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: "var(--cyan)" }} />
             Nairobi · Est. 2020
           </p>
-          <h1 className="headline text-[clamp(3.5rem,14vw,11rem)]">
-            <RiseLines lines={["SMARTBOY", "MANAGEMENT"]} />
+          <h1 className="headline text-[clamp(2.75rem,9vw,7.5rem)] leading-[0.95] tracking-[-0.02em]">
+            <RiseLines lines={["SMARTBOY", "MANAGEMENT."]} />
           </h1>
-          <p className="mt-8 max-w-2xl text-[clamp(1.05rem,1.6vw,1.5rem)] font-medium leading-snug" style={{ color: "var(--foreground)" }}>
+          <p className="mt-7 max-w-2xl text-[clamp(1rem,1.4vw,1.25rem)] font-medium leading-snug" style={{ color: "var(--foreground)" }}>
             We're here to turn{" "}
             <span style={{ color: "var(--cyan)" }}>dreams</span> into{" "}
             <span style={{ color: "var(--cyan)" }}>stardom</span> and{" "}
             <span style={{ color: "var(--pink)" }}>audiences</span> into{" "}
             <span style={{ color: "var(--pink)" }}>fans.</span>
           </p>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed opacity-70">
+          <p className="mt-5 max-w-xl text-[15px] leading-relaxed opacity-70">
             SMARTBOY MANAGEMENT is East Africa's premier record label and talent management house —
             shaping the voices that define a generation.
           </p>
@@ -352,11 +380,12 @@ function SmartboyHome() {
             </a>
           </div>
 
-          <div className="mt-24 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] opacity-50">
+          <div className="mt-20 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] opacity-50">
             <span className="h-px w-10 bg-current" /> Scroll
           </div>
         </div>
       </section>
+
 
       {/* ============= TICKERS ============= */}
       <Ticker bg="var(--cyan)" color="#000" items={["RECORDING ARTISTS", "RECORDING ARTISTS", "RECORDING ARTISTS"]} />
@@ -370,7 +399,7 @@ function SmartboyHome() {
               <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--yellow)" }}>
                 The Roster
               </p>
-              <h2 className="headline text-[clamp(2.8rem,8vw,6.5rem)]">
+              <h2 className="headline text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.02em]">
                 BUILDING <span style={{ color: "var(--cyan)" }}>STARS</span>.
               </h2>
             </div>
@@ -396,7 +425,7 @@ function SmartboyHome() {
             <p className="mb-4 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--cyan)" }}>
               Our Story
             </p>
-            <h2 className="headline text-[clamp(2.6rem,7vw,6rem)]">
+            <h2 className="headline text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.02em]">
               THE SOUND OF
               <br />
               <span style={{ color: "var(--pink)" }}>EAST AFRICA.</span>
@@ -443,7 +472,7 @@ function SmartboyHome() {
             <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--yellow)" }}>
               Leadership
             </p>
-            <h2 className="headline text-[clamp(2.6rem,7vw,6rem)]">THE VISIONARY.</h2>
+            <h2 className="headline text-[clamp(2rem,5vw,4rem)] leading-[0.95] tracking-[-0.02em]">THE VISIONARY.</h2>
           </div>
           <div className="grid gap-12 md:grid-cols-12">
             <div className="reveal md:col-span-5">
@@ -501,48 +530,64 @@ function SmartboyHome() {
       <Ticker bg="var(--pink)" color="#000" reverse items={["MUSIC WITHOUT LIMITS", "MUSIC WITHOUT LIMITS"]} />
 
       {/* ============= SERVICES ============= */}
-      <section id="services" className="px-5 py-24 md:px-8 md:py-32">
-        <div className="mx-auto grid max-w-[1400px] gap-16 md:grid-cols-12">
-          <div className="reveal md:col-span-4">
-            <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--cyan)" }}>
-              What We Do
-            </p>
-            <h2 className="headline text-[clamp(2.4rem,5.5vw,4.5rem)]">
-              FULL-SPECTRUM <span style={{ color: "var(--yellow)" }}>SUPPORT</span>.
-            </h2>
-            <p className="mt-6 max-w-sm text-base leading-relaxed opacity-70">
-              From signing to stardom, we provide everything an artist needs to build a sustainable, powerful
-              career in the music industry.
+      <section id="services" className="px-5 py-24 md:px-8 md:py-32" style={{ background: "var(--background)" }}>
+        <div className="mx-auto max-w-[1400px]">
+          <div className="reveal mb-14 flex flex-wrap items-end justify-between gap-8">
+            <div className="max-w-xl">
+              <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--cyan)" }}>
+                What We Do
+              </p>
+              <h2 className="headline text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.02em]">
+                FULL-SPECTRUM <span style={{ color: "var(--yellow)" }}>SUPPORT</span>.
+              </h2>
+            </div>
+            <p className="max-w-sm text-[15px] leading-relaxed opacity-70">
+              From signing to stardom — we provide every tool an artist needs to build a sustainable, powerful career.
             </p>
           </div>
 
-          <div className="md:col-span-8">
-            <div className="grid grid-cols-1 gap-px sm:grid-cols-2" style={{ background: "var(--border)" }}>
-              {SERVICES.map((s, i) => (
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {SERVICES.map((s, i) => (
+              <article
+                key={s.name}
+                className="reveal group relative flex flex-col overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_-20px_rgba(83,243,243,0.35)]"
+                style={{
+                  borderColor: "var(--border)",
+                  background: "linear-gradient(180deg, var(--surface) 0%, var(--background) 100%)",
+                }}
+              >
                 <div
-                  key={s.name}
-                  className="reveal group p-7 transition-colors md:p-9"
-                  style={{ background: "var(--background)" }}
-                >
-                  <div className="mb-6 flex items-center justify-between">
-                    <span className="text-[11px] font-bold tracking-[0.22em] opacity-50">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span
-                      className="transition-transform group-hover:translate-x-1"
-                      style={{ color: "var(--cyan)" }}
-                    >
-                      →
-                    </span>
+                  className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-40"
+                  style={{ background: i % 3 === 0 ? "var(--cyan)" : i % 3 === 1 ? "var(--pink)" : "var(--yellow)" }}
+                />
+                <div className="mb-6 flex items-center justify-between">
+                  <div
+                    className="flex h-12 w-12 items-center justify-center rounded-xl border transition-colors group-hover:border-transparent"
+                    style={{
+                      borderColor: "var(--border)",
+                      background: "var(--background)",
+                      color: i % 3 === 0 ? "var(--cyan)" : i % 3 === 1 ? "var(--pink)" : "var(--yellow)",
+                    }}
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={SERVICE_ICONS[s.name] || "M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"} />
+                    </svg>
                   </div>
-                  <h3 className="headline text-[clamp(1.4rem,2.2vw,1.9rem)]">{s.name}</h3>
-                  <p className="mt-3 max-w-sm text-sm leading-relaxed opacity-70">{s.desc}</p>
+                  <span className="text-[10px] font-bold tracking-[0.22em] opacity-40">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                 </div>
-              ))}
-            </div>
+                <h3 className="headline text-[1.35rem] leading-tight md:text-[1.5rem]">{s.name}</h3>
+                <p className="mt-3 text-[14px] leading-relaxed opacity-70">{s.desc}</p>
+                <div className="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] opacity-60 transition-opacity group-hover:opacity-100">
+                  Learn more <span className="transition-transform group-hover:translate-x-1">→</span>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
+
 
       {/* ============= RELEASES ============= */}
       <section id="releases" className="px-5 py-24 md:px-8 md:py-32" style={{ background: "var(--ink)" }}>
@@ -552,7 +597,7 @@ function SmartboyHome() {
               <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--pink)" }}>
                 Discography
               </p>
-              <h2 className="headline text-[clamp(2.6rem,7vw,6rem)]">
+              <h2 className="headline text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.02em]">
                 LATEST <span style={{ color: "var(--pink)" }}>RELEASES</span>.
               </h2>
             </div>
@@ -589,72 +634,148 @@ function SmartboyHome() {
       </section>
 
       {/* ============= CONTACT ============= */}
-      <section id="contact" className="px-5 py-24 md:px-8 md:py-36">
-        <div className="mx-auto max-w-[1100px]">
-          <div className="reveal text-center">
+      <section id="contact" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-32" style={{ background: "var(--surface)" }}>
+        <div
+          className="pointer-events-none absolute -left-32 top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full opacity-20 blur-3xl"
+          style={{ background: "var(--cyan)" }}
+        />
+        <div
+          className="pointer-events-none absolute -right-32 top-10 h-[360px] w-[360px] rounded-full opacity-20 blur-3xl"
+          style={{ background: "var(--pink)" }}
+        />
+
+        <div className="relative mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="reveal lg:col-span-5">
             <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--cyan)" }}>
               Get In Touch
             </p>
-            <h2 className="headline text-[clamp(2.6rem,7vw,5.5rem)]">
-              READY TO BUILD
-              <br />
+            <h2 className="headline text-[clamp(2.25rem,5vw,4rem)] leading-[0.95] tracking-[-0.02em]">
+              READY TO BUILD<br />
               SOMETHING <span style={{ color: "var(--yellow)" }}>LEGENDARY?</span>
             </h2>
+            <p className="mt-6 max-w-md text-[15px] leading-relaxed opacity-70">
+              Send us a message — it lands instantly on our WhatsApp. We reply fast.
+            </p>
+
+            <div className="mt-10 space-y-5">
+              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener" className="group flex items-center gap-4">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl" style={{ background: "#25D366", color: "#000" }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4h.01c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.3zM12 21.8h-.01a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.9 9.9 0 1 1 18.4-5.2c0 5.4-4.4 9.9-9.9 9.9z"/></svg>
+                </span>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.22em] opacity-60">WhatsApp</div>
+                  <div className="text-base font-semibold group-hover:underline">+254 700 000 000</div>
+                </div>
+              </a>
+              <a href="mailto:hello@smartboymgmt.co" className="group flex items-center gap-4">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl" style={{ background: "var(--cyan)", color: "#000" }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                </span>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.22em] opacity-60">Email</div>
+                  <div className="text-base font-semibold group-hover:underline">hello@smartboymgmt.co</div>
+                </div>
+              </a>
+              <div className="flex items-center gap-4">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl" style={{ background: "var(--pink)", color: "#000" }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.22em] opacity-60">Studio</div>
+                  <div className="text-base font-semibold">Nairobi, Kenya</div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              const f = e.currentTarget as HTMLFormElement;
+              const data = new FormData(f);
+              const name = (data.get("name") as string) || "";
+              const email = (data.get("email") as string) || "";
+              const phone = (data.get("phone") as string) || "";
+              const inquiry = (data.get("inquiry") as string) || "";
+              const demo = (data.get("demo") as string) || "";
+              const message = (data.get("message") as string) || "";
+              const text =
+                `*New Smartboy Inquiry*\n\n` +
+                `*Name:* ${name}\n` +
+                `*Email:* ${email}\n` +
+                `*Phone:* ${phone}\n` +
+                `*Type:* ${inquiry}\n` +
+                (demo ? `*Demo/Link:* ${demo}\n` : "") +
+                `\n*Message:*\n${message}`;
+              const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+              window.open(url, "_blank", "noopener");
               setSent(true);
               setTimeout(() => setSent(false), 3500);
             }}
-            className="reveal mt-14 grid gap-6 md:grid-cols-2"
+            className="reveal lg:col-span-7"
           >
-            <Field label="Full Name" name="name" placeholder="Your name" />
-            <Field label="Email" name="email" type="email" placeholder="your@email.com" />
-            <Field label="Phone" name="phone" type="tel" placeholder="+254 ..." />
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-semibold uppercase tracking-[0.22em] opacity-60">
-                Inquiry Type
-              </label>
-              <select
-                required
-                className="border-0 border-b bg-transparent py-3 text-base font-medium outline-none focus:border-[var(--cyan)]"
-                style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
-              >
-                <option style={{ color: "#000" }}>Artist Signing</option>
-                <option style={{ color: "#000" }}>Demo Submission</option>
-                <option style={{ color: "#000" }}>Brand Partnership</option>
-                <option style={{ color: "#000" }}>Event Booking</option>
-                <option style={{ color: "#000" }}>Press &amp; Media</option>
-                <option style={{ color: "#000" }}>General Inquiry</option>
-              </select>
-            </div>
-            <div className="md:col-span-2">
-              <Field label="Demo / Link (optional)" name="demo" placeholder="SoundCloud, Drive, etc." />
-            </div>
-            <div className="md:col-span-2 flex flex-col gap-2">
-              <label className="text-[11px] font-semibold uppercase tracking-[0.22em] opacity-60">Message</label>
-              <textarea
-                rows={5}
-                placeholder="Tell us about yourself or your project..."
-                className="border-0 border-b bg-transparent py-3 text-base font-medium outline-none focus:border-[var(--cyan)] resize-none"
-                style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
-              />
-            </div>
-            <div className="md:col-span-2 flex justify-end">
-              <button
-                type="submit"
-                className="inline-flex items-center gap-3 rounded-full px-8 py-4 text-[12px] font-bold uppercase tracking-[0.22em] transition"
-                style={{ background: sent ? "var(--yellow)" : "var(--cyan)", color: "#000" }}
-              >
-                {sent ? "Message Sent ✓" : "Send Message"}
-                <span>→</span>
-              </button>
+            <div
+              className="rounded-3xl border p-6 md:p-8"
+              style={{
+                borderColor: "var(--border)",
+                background: "var(--background)",
+                boxShadow: "0 30px 80px -40px rgba(0,0,0,0.4)",
+              }}
+            >
+              <div className="grid gap-5 md:grid-cols-2">
+                <Field label="Full Name" name="name" placeholder="Your name" />
+                <Field label="Email" name="email" type="email" placeholder="your@email.com" />
+                <Field label="Phone" name="phone" type="tel" placeholder="+254 ..." />
+                <div className="flex flex-col gap-2">
+                  <label className="text-[11px] font-semibold uppercase tracking-[0.22em] opacity-60">Inquiry Type</label>
+                  <select
+                    name="inquiry"
+                    required
+                    className="rounded-xl border bg-transparent px-4 py-3 text-[15px] font-medium outline-none transition focus:border-[var(--cyan)]"
+                    style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
+                  >
+                    <option style={{ color: "#000" }}>Artist Signing</option>
+                    <option style={{ color: "#000" }}>Demo Submission</option>
+                    <option style={{ color: "#000" }}>Brand Partnership</option>
+                    <option style={{ color: "#000" }}>Event Booking</option>
+                    <option style={{ color: "#000" }}>Press &amp; Media</option>
+                    <option style={{ color: "#000" }}>General Inquiry</option>
+                  </select>
+                </div>
+                <div className="md:col-span-2">
+                  <Field label="Demo / Link (optional)" name="demo" placeholder="SoundCloud, Drive, etc." />
+                </div>
+                <div className="md:col-span-2 flex flex-col gap-2">
+                  <label className="text-[11px] font-semibold uppercase tracking-[0.22em] opacity-60">Message</label>
+                  <textarea
+                    name="message"
+                    required
+                    rows={5}
+                    placeholder="Tell us about yourself or your project..."
+                    className="resize-none rounded-xl border bg-transparent px-4 py-3 text-[15px] font-medium outline-none transition focus:border-[var(--cyan)]"
+                    style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+                <p className="text-[11px] uppercase tracking-[0.2em] opacity-50">
+                  Replies via WhatsApp · usually within 24h
+                </p>
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.22em] transition hover:scale-[1.02]"
+                  style={{ background: sent ? "var(--yellow)" : "#25D366", color: "#000" }}
+                >
+                  {sent ? "Opening WhatsApp ✓" : "Send via WhatsApp"}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4h.01c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.3z"/></svg>
+                </button>
+              </div>
             </div>
           </form>
         </div>
       </section>
+
 
       {/* ============= PARTNERS ============= */}
       <section id="partners" className="px-5 py-20 md:px-8 md:py-28" style={{ background: "var(--surface)" }}>
@@ -841,7 +962,7 @@ function Field({
         name={name}
         type={type}
         placeholder={placeholder}
-        className="border-0 border-b bg-transparent py-3 text-base font-medium outline-none transition focus:border-[var(--cyan)]"
+        className="rounded-xl border bg-transparent px-4 py-3 text-[15px] font-medium outline-none transition focus:border-[var(--cyan)]"
         style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
       />
     </div>
