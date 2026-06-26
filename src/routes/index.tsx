@@ -249,23 +249,30 @@ function SmartboyHome() {
         className="fixed inset-x-0 top-0 z-50 transition-all duration-300"
         style={{
           background: scrolled
-            ? (dark ? "rgba(0,0,0,0.92)" : "rgba(255,255,255,0.95)")
+            ? (dark ? "rgba(8,8,10,0.78)" : "rgba(255,255,255,0.82)")
             : "transparent",
-          backdropFilter: scrolled ? "blur(14px)" : "none",
+          backdropFilter: scrolled ? "saturate(140%) blur(18px)" : "none",
+          WebkitBackdropFilter: scrolled ? "saturate(140%) blur(18px)" : "none",
           borderBottom: scrolled ? `1px solid var(--border)` : "1px solid transparent",
         }}
       >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-3 md:px-8 md:py-4">
-          <a href="#home" aria-label="Smartboy Management home">
+          <a href="#home" aria-label="Smartboy Management home" className="flex items-center">
             <Logo dark={!dark} />
           </a>
 
-          <nav className="hidden xl:flex items-center gap-7">
+          <nav
+            className="hidden lg:flex items-center gap-1 rounded-full border px-1.5 py-1.5"
+            style={{
+              borderColor: dark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.08)",
+              background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)",
+            }}
+          >
             {NAV.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="text-[12px] font-semibold uppercase tracking-[0.18em] transition hover:opacity-60"
+                className="rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] transition hover:bg-[var(--foreground)] hover:text-[var(--background)]"
                 style={{ color: "var(--foreground)" }}
               >
                 {l.label}
@@ -273,7 +280,14 @@ function SmartboyHome() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3 md:gap-4">
+          <div className="flex items-center gap-2.5">
+            <a
+              href="#contact"
+              className="hidden sm:inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] transition hover:opacity-90"
+              style={{ background: "var(--cyan)", color: "#000" }}
+            >
+              Work With Us <span aria-hidden>→</span>
+            </a>
             <ThemeToggle dark={dark} onToggle={() => setLight(!light)} />
             <MenuButton open={menuOpen} onClick={() => setMenuOpen((o) => !o)} dark={dark} />
           </div>
@@ -282,34 +296,44 @@ function SmartboyHome() {
 
       {/* ============= MOBILE / FULL MENU ============= */}
       <div
-        className="fixed inset-0 z-40 transition-all duration-500"
+        className="fixed inset-0 z-40 transition-all duration-500 lg:hidden"
         style={{
-          background: dark ? "#000" : "#fff",
+          background: dark ? "rgba(8,8,10,0.96)" : "rgba(255,255,255,0.98)",
+          backdropFilter: "blur(20px)",
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? "auto" : "none",
         }}
       >
-        <div className="flex h-full flex-col justify-center px-6 md:px-16">
-          <ul className="space-y-4 md:space-y-6">
+        <div className="flex h-full flex-col justify-center px-7 md:px-14">
+          <ul className="space-y-3 md:space-y-4">
             {NAV.map((l, i) => (
-              <li key={l.href}>
+              <li key={l.href} className="overflow-hidden">
                 <a
                   href={l.href}
                   onClick={() => setMenuOpen(false)}
-                  className="headline block text-[clamp(3rem,10vw,7rem)] transition-all hover:translate-x-3 hover:text-[var(--cyan)]"
+                  className="headline block text-[clamp(2.25rem,8vw,4.5rem)] leading-[1.05] transition-all hover:translate-x-2 hover:text-[var(--cyan)]"
                   style={{
-                    transitionDelay: menuOpen ? `${i * 60}ms` : "0ms",
+                    transitionDelay: menuOpen ? `${i * 50}ms` : "0ms",
                     opacity: menuOpen ? 1 : 0,
-                    transform: menuOpen ? "translateY(0)" : "translateY(30px)",
+                    transform: menuOpen ? "translateY(0)" : "translateY(28px)",
                     transitionProperty: "opacity, transform, color",
                   }}
                 >
-                  {l.label}.
+                  <span className="mr-3 align-middle text-[0.45em] opacity-40">0{i + 1}</span>
+                  {l.label}
                 </a>
               </li>
             ))}
           </ul>
-          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-2 text-[12px] font-semibold uppercase tracking-[0.2em] opacity-60">
+          <a
+            href="#contact"
+            onClick={() => setMenuOpen(false)}
+            className="mt-10 inline-flex w-fit items-center gap-3 rounded-full px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.22em]"
+            style={{ background: "var(--cyan)", color: "#000" }}
+          >
+            Work With Us →
+          </a>
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.2em] opacity-60">
             <span>Nairobi · Est. 2020</span>
             <span>hello@smartboymgmt.co</span>
             <span>+254 700 000 000</span>
@@ -318,23 +342,24 @@ function SmartboyHome() {
       </div>
 
       {/* ============= HERO ============= */}
-      <section id="home" className="relative min-h-screen overflow-hidden pt-28 md:pt-36">
+      <section id="home" className="relative min-h-[92vh] overflow-hidden pt-28 md:pt-36">
         <BackgroundLights />
         <div className="relative z-10 mx-auto max-w-[1400px] px-5 md:px-8">
-          <p className="mb-6 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--cyan)" }}>
+          <p className="mb-5 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em]" style={{ color: "var(--cyan)" }}>
+            <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: "var(--cyan)" }} />
             Nairobi · Est. 2020
           </p>
-          <h1 className="headline text-[clamp(3.5rem,14vw,11rem)]">
-            <RiseLines lines={["SMARTBOY", "MANAGEMENT"]} />
+          <h1 className="headline text-[clamp(2.75rem,9vw,7.5rem)] leading-[0.95] tracking-[-0.02em]">
+            <RiseLines lines={["SMARTBOY", "MANAGEMENT."]} />
           </h1>
-          <p className="mt-8 max-w-2xl text-[clamp(1.05rem,1.6vw,1.5rem)] font-medium leading-snug" style={{ color: "var(--foreground)" }}>
+          <p className="mt-7 max-w-2xl text-[clamp(1rem,1.4vw,1.25rem)] font-medium leading-snug" style={{ color: "var(--foreground)" }}>
             We're here to turn{" "}
             <span style={{ color: "var(--cyan)" }}>dreams</span> into{" "}
             <span style={{ color: "var(--cyan)" }}>stardom</span> and{" "}
             <span style={{ color: "var(--pink)" }}>audiences</span> into{" "}
             <span style={{ color: "var(--pink)" }}>fans.</span>
           </p>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed opacity-70">
+          <p className="mt-5 max-w-xl text-[15px] leading-relaxed opacity-70">
             SMARTBOY MANAGEMENT is East Africa's premier record label and talent management house —
             shaping the voices that define a generation.
           </p>
@@ -355,11 +380,12 @@ function SmartboyHome() {
             </a>
           </div>
 
-          <div className="mt-24 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] opacity-50">
+          <div className="mt-20 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] opacity-50">
             <span className="h-px w-10 bg-current" /> Scroll
           </div>
         </div>
       </section>
+
 
       {/* ============= TICKERS ============= */}
       <Ticker bg="var(--cyan)" color="#000" items={["RECORDING ARTISTS", "RECORDING ARTISTS", "RECORDING ARTISTS"]} />
