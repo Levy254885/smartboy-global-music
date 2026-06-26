@@ -634,72 +634,148 @@ function SmartboyHome() {
       </section>
 
       {/* ============= CONTACT ============= */}
-      <section id="contact" className="px-5 py-24 md:px-8 md:py-36">
-        <div className="mx-auto max-w-[1100px]">
-          <div className="reveal text-center">
+      <section id="contact" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-32" style={{ background: "var(--surface)" }}>
+        <div
+          className="pointer-events-none absolute -left-32 top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full opacity-20 blur-3xl"
+          style={{ background: "var(--cyan)" }}
+        />
+        <div
+          className="pointer-events-none absolute -right-32 top-10 h-[360px] w-[360px] rounded-full opacity-20 blur-3xl"
+          style={{ background: "var(--pink)" }}
+        />
+
+        <div className="relative mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="reveal lg:col-span-5">
             <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.3em]" style={{ color: "var(--cyan)" }}>
               Get In Touch
             </p>
-            <h2 className="headline text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.02em]">
-              READY TO BUILD
-              <br />
+            <h2 className="headline text-[clamp(2.25rem,5vw,4rem)] leading-[0.95] tracking-[-0.02em]">
+              READY TO BUILD<br />
               SOMETHING <span style={{ color: "var(--yellow)" }}>LEGENDARY?</span>
             </h2>
+            <p className="mt-6 max-w-md text-[15px] leading-relaxed opacity-70">
+              Send us a message — it lands instantly on our WhatsApp. We reply fast.
+            </p>
+
+            <div className="mt-10 space-y-5">
+              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener" className="group flex items-center gap-4">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl" style={{ background: "#25D366", color: "#000" }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4h.01c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.3zM12 21.8h-.01a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.9 9.9 0 1 1 18.4-5.2c0 5.4-4.4 9.9-9.9 9.9z"/></svg>
+                </span>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.22em] opacity-60">WhatsApp</div>
+                  <div className="text-base font-semibold group-hover:underline">+254 700 000 000</div>
+                </div>
+              </a>
+              <a href="mailto:hello@smartboymgmt.co" className="group flex items-center gap-4">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl" style={{ background: "var(--cyan)", color: "#000" }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                </span>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.22em] opacity-60">Email</div>
+                  <div className="text-base font-semibold group-hover:underline">hello@smartboymgmt.co</div>
+                </div>
+              </a>
+              <div className="flex items-center gap-4">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl" style={{ background: "var(--pink)", color: "#000" }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.22em] opacity-60">Studio</div>
+                  <div className="text-base font-semibold">Nairobi, Kenya</div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              const f = e.currentTarget as HTMLFormElement;
+              const data = new FormData(f);
+              const name = (data.get("name") as string) || "";
+              const email = (data.get("email") as string) || "";
+              const phone = (data.get("phone") as string) || "";
+              const inquiry = (data.get("inquiry") as string) || "";
+              const demo = (data.get("demo") as string) || "";
+              const message = (data.get("message") as string) || "";
+              const text =
+                `*New Smartboy Inquiry*\n\n` +
+                `*Name:* ${name}\n` +
+                `*Email:* ${email}\n` +
+                `*Phone:* ${phone}\n` +
+                `*Type:* ${inquiry}\n` +
+                (demo ? `*Demo/Link:* ${demo}\n` : "") +
+                `\n*Message:*\n${message}`;
+              const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+              window.open(url, "_blank", "noopener");
               setSent(true);
               setTimeout(() => setSent(false), 3500);
             }}
-            className="reveal mt-14 grid gap-6 md:grid-cols-2"
+            className="reveal lg:col-span-7"
           >
-            <Field label="Full Name" name="name" placeholder="Your name" />
-            <Field label="Email" name="email" type="email" placeholder="your@email.com" />
-            <Field label="Phone" name="phone" type="tel" placeholder="+254 ..." />
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-semibold uppercase tracking-[0.22em] opacity-60">
-                Inquiry Type
-              </label>
-              <select
-                required
-                className="border-0 border-b bg-transparent py-3 text-base font-medium outline-none focus:border-[var(--cyan)]"
-                style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
-              >
-                <option style={{ color: "#000" }}>Artist Signing</option>
-                <option style={{ color: "#000" }}>Demo Submission</option>
-                <option style={{ color: "#000" }}>Brand Partnership</option>
-                <option style={{ color: "#000" }}>Event Booking</option>
-                <option style={{ color: "#000" }}>Press &amp; Media</option>
-                <option style={{ color: "#000" }}>General Inquiry</option>
-              </select>
-            </div>
-            <div className="md:col-span-2">
-              <Field label="Demo / Link (optional)" name="demo" placeholder="SoundCloud, Drive, etc." />
-            </div>
-            <div className="md:col-span-2 flex flex-col gap-2">
-              <label className="text-[11px] font-semibold uppercase tracking-[0.22em] opacity-60">Message</label>
-              <textarea
-                rows={5}
-                placeholder="Tell us about yourself or your project..."
-                className="border-0 border-b bg-transparent py-3 text-base font-medium outline-none focus:border-[var(--cyan)] resize-none"
-                style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
-              />
-            </div>
-            <div className="md:col-span-2 flex justify-end">
-              <button
-                type="submit"
-                className="inline-flex items-center gap-3 rounded-full px-8 py-4 text-[12px] font-bold uppercase tracking-[0.22em] transition"
-                style={{ background: sent ? "var(--yellow)" : "var(--cyan)", color: "#000" }}
-              >
-                {sent ? "Message Sent ✓" : "Send Message"}
-                <span>→</span>
-              </button>
+            <div
+              className="rounded-3xl border p-6 md:p-8"
+              style={{
+                borderColor: "var(--border)",
+                background: "var(--background)",
+                boxShadow: "0 30px 80px -40px rgba(0,0,0,0.4)",
+              }}
+            >
+              <div className="grid gap-5 md:grid-cols-2">
+                <Field label="Full Name" name="name" placeholder="Your name" />
+                <Field label="Email" name="email" type="email" placeholder="your@email.com" />
+                <Field label="Phone" name="phone" type="tel" placeholder="+254 ..." />
+                <div className="flex flex-col gap-2">
+                  <label className="text-[11px] font-semibold uppercase tracking-[0.22em] opacity-60">Inquiry Type</label>
+                  <select
+                    name="inquiry"
+                    required
+                    className="rounded-xl border bg-transparent px-4 py-3 text-[15px] font-medium outline-none transition focus:border-[var(--cyan)]"
+                    style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
+                  >
+                    <option style={{ color: "#000" }}>Artist Signing</option>
+                    <option style={{ color: "#000" }}>Demo Submission</option>
+                    <option style={{ color: "#000" }}>Brand Partnership</option>
+                    <option style={{ color: "#000" }}>Event Booking</option>
+                    <option style={{ color: "#000" }}>Press &amp; Media</option>
+                    <option style={{ color: "#000" }}>General Inquiry</option>
+                  </select>
+                </div>
+                <div className="md:col-span-2">
+                  <Field label="Demo / Link (optional)" name="demo" placeholder="SoundCloud, Drive, etc." />
+                </div>
+                <div className="md:col-span-2 flex flex-col gap-2">
+                  <label className="text-[11px] font-semibold uppercase tracking-[0.22em] opacity-60">Message</label>
+                  <textarea
+                    name="message"
+                    required
+                    rows={5}
+                    placeholder="Tell us about yourself or your project..."
+                    className="resize-none rounded-xl border bg-transparent px-4 py-3 text-[15px] font-medium outline-none transition focus:border-[var(--cyan)]"
+                    style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+                <p className="text-[11px] uppercase tracking-[0.2em] opacity-50">
+                  Replies via WhatsApp · usually within 24h
+                </p>
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.22em] transition hover:scale-[1.02]"
+                  style={{ background: sent ? "var(--yellow)" : "#25D366", color: "#000" }}
+                >
+                  {sent ? "Opening WhatsApp ✓" : "Send via WhatsApp"}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4h.01c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.3z"/></svg>
+                </button>
+              </div>
             </div>
           </form>
         </div>
       </section>
+
 
       {/* ============= PARTNERS ============= */}
       <section id="partners" className="px-5 py-20 md:px-8 md:py-28" style={{ background: "var(--surface)" }}>
