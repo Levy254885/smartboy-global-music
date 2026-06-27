@@ -50,15 +50,12 @@ const RELEASES = [
   { n: "05", title: "Smartboy Compilation", artist: "Various Artists", meta: "Album · 2023", badge: "Label" },
 ];
 
-import actsLogo from "../assets/acts-music-group.jpg.asset.json";
-import warnerLogo from "../assets/warner-music-africa.jpg.asset.json";
-import virginLogo from "../assets/virgin-music-group.jpg.asset.json";
-import smartboyLogo from "../assets/smartboy-logo-v2.png.asset.json";
+const smartboyLogo = { url: "/brand/smartboy-logo.png" };
 
 const PARTNERS = [
-  { name: "ACTS Music Group", role: "Distribution · Publishing", logo: actsLogo.url },
-  { name: "Warner Music Africa", role: "Global Label Partner", logo: warnerLogo.url },
-  { name: "Virgin Music Group", role: "International Distribution", logo: virginLogo.url },
+  { name: "ACTS Music Group", role: "Distribution · Publishing", logo: "/brand/acts.jpg" },
+  { name: "Warner Music Africa", role: "Global Label Partner", logo: "/brand/warner.jpg" },
+  { name: "Virgin Music Group", role: "International Distribution", logo: "/brand/virgin.jpg" },
 ];
 
 // WhatsApp destination for contact form submissions
