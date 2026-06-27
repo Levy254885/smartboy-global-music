@@ -15,7 +15,7 @@
   --color-yellow: var(--yellow);
   --color-blue: var(--blue);
   --color-border: var(--border);
-  --font-display: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "Cormorant Garamond", "Cormorant Garant", Georgia, serif;
   --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --animate-marquee: marquee 28s linear infinite;
   --animate-marquee-rev: marquee-rev 32s linear infinite;
@@ -23,25 +23,32 @@
 }
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  --ink: #000000;
-  --surface: #0a0a0a;
-  --muted: #8a8a93;
-  --cyan: #53f3f3;
-  --pink: #ff44c7;
-  --yellow: #efff1a;
-  --blue: #083dcc;
-  --border: rgba(255,255,255,0.12);
+  --background: #0A0A0A;
+  --foreground: #FFFFFF;
+  --ink: #0A0A0A;
+  --surface: #111114;
+  --surface-2: #1A1A1E;
+  --muted: #9999A8;
+  --smoke: #666670;
+  --cream: #E8E8E8;
+  --cyan: #CC0000;
+  --pink: #E83333;
+  --yellow: #CC0000;
+  --blue: #990000;
+  --gold: #CC0000;
+  --gold-light: #E83333;
+  --gold-dark: #990000;
+  --border: rgba(255,255,255,0.10);
 }
 
 .light {
   --background: #ffffff;
-  --foreground: #000000;
+  --foreground: #0A0A0A;
   --ink: #ffffff;
-  --surface: #f4f4f4;
+  --surface: #f6f6f6;
+  --surface-2: #ececec;
   --muted: #55555c;
-  --border: rgba(0,0,0,0.14);
+  --border: rgba(0,0,0,0.12);
 }
 
 @keyframes marquee {
@@ -68,10 +75,20 @@ body {
 
 .headline {
   font-family: var(--font-display);
-  font-weight: 900;
-  letter-spacing: -0.045em;
-  line-height: 0.88;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.02;
   text-transform: none;
+  font-style: italic;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold);
 }
 
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
