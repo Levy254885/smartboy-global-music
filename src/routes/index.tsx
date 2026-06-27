@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
-// @ts-expect-error raw import
 import bodyHtml from "../content/sbm-body.html?raw";
-// @ts-expect-error raw import
 import scriptSrc from "../content/sbm-script.js?raw";
 
 export const Route = createFileRoute("/")({
