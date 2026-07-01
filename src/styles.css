@@ -1065,3 +1065,258 @@ body {
     .nav-cta { padding: 0.5rem 0.9rem; }
   }
 
+
+/* ─────────────────────────────────────────────────────────
+   v3 UPDATE — Flat buttons, Leadership-in-About,
+   new roster cards w/ hover socials, tight mobile fit.
+   ───────────────────────────────────────────────────────── */
+
+/* Global overflow guard so nothing forces a zoom on mobile */
+html, body { max-width: 100%; overflow-x: hidden; }
+body { -webkit-text-size-adjust: 100%; }
+img, svg, video { max-width: 100%; height: auto; }
+
+/* Flat buttons — remove glassmorphism / 3d */
+.btn-primary,
+.btn-ghost,
+.nav-cta,
+.form-submit {
+  background: #CC0000 !important;
+  color: #fff !important;
+  border: 1px solid #CC0000 !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+  transition: background .2s ease, border-color .2s ease, color .2s ease !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.btn-primary:hover,
+.nav-cta:hover,
+.form-submit:hover { background: #A80000 !important; border-color: #A80000 !important; }
+.btn-ghost {
+  background: transparent !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.35) !important;
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: #fff !important;
+}
+
+/* ── Leadership block sitting inside About ── */
+.leadership-block { margin-top: 5rem; }
+.leadership-block .divider { margin-bottom: 2.5rem; }
+.leadership-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+.leader-portrait { position: relative; }
+.leader-portrait img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+  border-radius: 2px;
+  filter: contrast(1.02) saturate(1.05);
+}
+.leader-nameplate {
+  background: #CC0000;
+  padding: 1rem 1.25rem;
+}
+.leader-name {
+  font-family: 'Cormorant Garant', 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  color: #fff;
+  line-height: 1.1;
+}
+.leader-role {
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  margin-top: 0.3rem;
+  font-weight: 600;
+}
+.leader-bio blockquote {
+  font-family: 'Cormorant Garant', 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-style: italic;
+  color: #EDEDED;
+  line-height: 1.4;
+  border-left: 3px solid #CC0000;
+  padding-left: 1.5rem;
+  margin: 0 0 1.75rem;
+}
+.leader-bio p {
+  color: #B8B8C0;
+  line-height: 1.85;
+  font-size: 0.95rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+.leader-bio strong { color: #fff; font-weight: 500; }
+.leader-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1.75rem;
+}
+.leader-meta span {
+  display: block;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #CC0000;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+.leader-meta b {
+  font-weight: 300;
+  color: #F0F0F0;
+  font-size: 0.9rem;
+}
+
+/* ── New Roster grid + cards (Sevdaliza-style) ── */
+.roster-grid2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  padding: 0 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.artist-card2 { display: flex; flex-direction: column; }
+.artist-media {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #1A1A1E;
+  isolation: isolate;
+}
+.artist-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .8s cubic-bezier(.2,.8,.2,1), filter .5s ease;
+}
+.artist-card2:hover .artist-media img { transform: scale(1.06); filter: brightness(0.6); }
+.artist-media-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #1A1A1E 0%, #0A0A0A 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.artist-initial2 {
+  font-family: 'Cormorant Garant','Cormorant Garamond', serif;
+  font-size: 5rem;
+  color: transparent;
+  background: linear-gradient(180deg,#E83333,rgba(204,0,0,0.2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  letter-spacing: -0.03em;
+}
+.artist-socials {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 1rem;
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform .45s cubic-bezier(.2,.8,.2,1), opacity .35s ease;
+  background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+  z-index: 2;
+}
+.artist-card2:hover .artist-socials,
+.artist-card2:focus-within .artist-socials {
+  transform: translateY(0);
+  opacity: 1;
+}
+.soc {
+  width: 40px; height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #0A0A0A;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+.soc:hover { transform: translateY(-2px); }
+.soc svg { width: 18px; height: 18px; }
+.soc-spotify:hover  { background: #1DB954; color:#fff; }
+.soc-instagram:hover{ background: #E1306C; color:#fff; }
+.soc-youtube:hover  { background: #FF0000; color:#fff; }
+.soc-tiktok:hover   { background: #000; color:#fff; box-shadow: inset 0 0 0 1px #25F4EE; }
+.soc-facebook:hover { background: #1877F2; color:#fff; }
+
+.artist-info { padding: 1rem 0.25rem 0; }
+.artist-tag2 {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #E83333;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.artist-name2 {
+  font-family: 'Cormorant Garant','Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: #fff;
+  line-height: 1.1;
+}
+.artist-genre2 {
+  font-size: 0.78rem;
+  color: #9999A8;
+  margin-top: 0.3rem;
+  letter-spacing: 0.03em;
+}
+
+/* On touch devices, socials always visible (no hover) */
+@media (hover: none) {
+  .artist-socials { transform: translateY(0); opacity: 1; }
+}
+
+/* ── Responsive fitting ── */
+@media (max-width: 900px) {
+  .leadership-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .leader-portrait { max-width: 320px; }
+}
+
+@media (max-width: 760px) {
+  .roster-grid2 {
+    grid-template-columns: 1fr;
+    padding: 0 1.1rem;
+    gap: 1.25rem;
+  }
+  .artist-media { aspect-ratio: 4/5; border-radius: 16px; }
+  .leadership-block { margin-top: 3rem; }
+  .leader-bio blockquote { font-size: 1.3rem; padding-left: 1rem; }
+  .leader-meta { gap: 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  section { padding: 3rem 1rem !important; }
+  nav { padding: 0.7rem 1rem !important; }
+  .hero { padding: 5rem 1rem 2.5rem !important; }
+  .section-title { font-size: clamp(2rem, 9vw, 3rem) !important; line-height: 1.05 !important; }
+  .hero-title { font-size: clamp(2.4rem, 11vw, 4rem) !important; line-height: 1 !important; }
+  .roster-grid2 { padding: 0 1rem; }
+  .about { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .services-grid { grid-template-columns: 1fr !important; }
+  .form-row { grid-template-columns: 1fr !important; }
+  .partners-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .contact-form { padding: 1.25rem !important; }
+}
