@@ -1320,3 +1320,22 @@ img, svg, video { max-width: 100%; height: auto; }
   .partners-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .contact-form { padding: 1.25rem !important; }
 }
+
+/* Nova Flow Boyz logo card — contain the logo on a dark backdrop */
+.artist-media.artist-media-logo {
+  background: radial-gradient(120% 80% at 50% 30%, #1a0808 0%, #0a0a0a 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+.artist-media.artist-media-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1), filter .4s ease;
+}
+.artist-card2:hover .artist-media.artist-media-logo img {
+  transform: scale(1.04);
+  filter: none;
+}
