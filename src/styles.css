@@ -1450,17 +1450,23 @@ img, svg, video { max-width: 100%; height: auto; }
 .mobile-drawer-scrim.is-open { opacity:1; visibility:visible; }
 body.drawer-open { overflow:hidden; }
 
-/* Show burger, hide nav-links + CTA on mobile */
+/* Mobile nav: keep CTA visible next to the burger */
 @media (max-width: 900px) {
   .nav-burger { display:inline-flex; align-items:center; justify-content:center; }
   .nav-links { display:none !important; }
-  nav > .nav-cta { display:none !important; }
-  .nav-logo-word { font-size:.9rem; letter-spacing:.12em; }
-  .nav-logo-mark { width:32px; height:32px; font-size:.9rem; }
+  nav > .nav-cta {
+    display: inline-flex !important;
+    padding: .55rem .9rem;
+    font-size: .6rem;
+    letter-spacing: .16em;
+    margin-left: auto;
+  }
 }
 @media (max-width: 400px) {
-  .nav-logo-word em { display:none; }
+  nav > .nav-cta { padding: .5rem .7rem; font-size: .55rem; letter-spacing: .14em; }
+  .nav-burger { width: 40px; height: 40px; margin-left: .5rem; }
 }
+
 
 /* ── Partners: mobile smooth marquee slider (desktop grid preserved) ── */
 @media (max-width: 760px) {
