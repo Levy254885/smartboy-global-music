@@ -1529,8 +1529,8 @@ body.drawer-open { overflow:hidden; }
   display:inline-block; margin-left:.35rem;
   font-family:'Inter', sans-serif;
   font-size:.62em; letter-spacing:.14em; text-transform:uppercase;
-  color:#CC0000; font-weight:600; vertical-align: middle;
-  opacity:.95;
+  color:#ffffff; font-weight:600; vertical-align: middle;
+  opacity:.9;
 }
 
 /* ── Animated footer tagline ── */
