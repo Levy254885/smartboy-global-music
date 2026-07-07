@@ -1656,11 +1656,12 @@ nav .nav-logo:hover img { transform: scale(1.04); }
   box-shadow: 0 18px 40px -20px rgba(0,0,0,.7);
 }
 .partner-card img {
-  max-height: 56px;
-  width: auto;
-  max-width: 180px;
+  max-height: 90px;
+  height: 90px;
+  width: 100%;
+  max-width: 220px;
   object-fit: contain;
-  filter: brightness(.95) drop-shadow(0 4px 10px rgba(0,0,0,.4));
+  filter: brightness(.98) drop-shadow(0 4px 10px rgba(0,0,0,.4));
   transition: filter .3s ease;
 }
 .partner-card:hover img { filter: brightness(1.1); }
@@ -1674,6 +1675,6 @@ nav .nav-logo:hover img { transform: scale(1.04); }
 }
 @media (max-width: 760px) {
   .partner-card { width: 200px; min-height: 130px; padding: 1.25rem 1rem; }
-  .partner-card img { max-height: 44px; max-width: 140px; }
+  .partner-card img { max-height: 70px; height: 70px; max-width: 160px; }
   .partners-track { animation-duration: 26s; gap: .85rem; }
 }
