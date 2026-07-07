@@ -1391,18 +1391,21 @@ img, svg, video { max-width: 100%; height: auto; }
 
 /* ── Mobile drawer ── */
 .mobile-drawer {
-  position:fixed; top:0; right:0; bottom:0;
-  width: min(86vw, 360px);
-  background: linear-gradient(180deg, #0d0d10 0%, #0a0a0c 100%);
-  border-left: 1px solid rgba(255,255,255,.06);
-  transform: translateX(105%) scaleX(1);
-  transform-origin: right center;
-  transition: transform .65s cubic-bezier(.34, 1.56, .48, 1);
+  position:fixed; top: calc(env(safe-area-inset-top) + 4rem); right: 12px;
+  width: min(72vw, 260px);
+  max-height: calc(100vh - 6rem);
+  background: linear-gradient(180deg, #101014 0%, #08080a 100%);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  transform: translateX(115%) scaleX(1);
+  transform-origin: top right;
+  transition: transform .6s cubic-bezier(.34, 1.56, .48, 1), opacity .3s ease;
   z-index: 200;
-  padding: calc(env(safe-area-inset-top) + 5.5rem) 1.75rem 2rem;
+  padding: 1.1rem 1.1rem 1.25rem;
   overflow-y:auto;
   visibility:hidden;
-  box-shadow: -30px 0 60px -20px rgba(0,0,0,.6);
+  opacity: 0;
+  box-shadow: -20px 30px 60px -25px rgba(0,0,0,.7), 0 0 0 1px rgba(204,0,0,.06);
   will-change: transform;
 }
 .mobile-drawer.is-open {
