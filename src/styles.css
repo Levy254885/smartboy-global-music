@@ -1675,6 +1675,6 @@ nav .nav-logo:hover img { transform: scale(1.04); }
 }
 @media (max-width: 760px) {
   .partner-card { width: 200px; min-height: 130px; padding: 1.25rem 1rem; }
-  .partner-card img { max-height: 44px; max-width: 140px; }
+  .partner-card img { max-height: 70px; height: 70px; max-width: 160px; }
   .partners-track { animation-duration: 26s; gap: .85rem; }
 }
