@@ -1652,31 +1652,19 @@ nav .nav-logo:hover img { transform: scale(1.04); }
   border-radius: 16px;
   transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
 }
-.partner-card:hover {
-  border-color: rgba(204,0,0,.35);
-  transform: translateY(-3px);
-  box-shadow: 0 18px 40px -20px rgba(0,0,0,.7);
-}
+.partner-card:hover { transform: translateY(-3px); }
 .partner-card img {
-  max-height: 90px;
-  height: 90px;
+  height: 100%;
   width: 100%;
-  max-width: 220px;
+  max-height: none;
+  max-width: none;
   object-fit: contain;
-  filter: brightness(.98) drop-shadow(0 4px 10px rgba(0,0,0,.4));
-  transition: filter .3s ease;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.5));
+  transition: transform .3s ease, filter .3s ease;
 }
-.partner-card:hover img { filter: brightness(1.1); }
-.partner-role {
-  font-size: .6rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.35);
-  font-weight: 500;
-  text-align: center;
-}
+.partner-card:hover img { transform: scale(1.04); }
+.partner-role { display: none; }
 @media (max-width: 760px) {
-  .partner-card { width: 200px; min-height: 130px; padding: 1.25rem 1rem; }
-  .partner-card img { max-height: 70px; height: 70px; max-width: 160px; }
+  .partner-card { width: 200px; height: 140px; padding: .75rem; }
   .partners-track { animation-duration: 26s; gap: .85rem; }
 }
