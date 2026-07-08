@@ -1663,12 +1663,8 @@ nav .nav-logo:hover img { transform: scale(1.04); }
   transition: transform .3s ease, filter .3s ease;
 }
 .partner-card:hover img { transform: scale(1.04); }
-.partner-role {
-.partner-card { }
-.partner-card .partner-role { display: none; }
-}
+.partner-role { display: none; }
 @media (max-width: 760px) {
-  .partner-card { width: 200px; min-height: 130px; padding: 1.25rem 1rem; }
-  .partner-card img { max-height: 70px; height: 70px; max-width: 160px; }
+  .partner-card { width: 200px; height: 140px; padding: .75rem; }
   .partners-track { animation-duration: 26s; gap: .85rem; }
 }
