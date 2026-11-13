@@ -669,6 +669,33 @@ body {
   }
 
   .form-submit:hover { background: var(--gold-light); }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .form-submit:focus-visible { outline: 2px solid var(--offwhite); outline-offset: -4px; }
+
+  .form-honey {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .form-status {
+    background: var(--obsidian-mid);
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--offwhite);
+    margin: 0;
+  }
+  .form-status:empty { display: none; }
+  .form-status.is-success { color: var(--offwhite); border-left: 2px solid var(--gold); }
+  .form-status.is-error { color: #ff8a8a; border-left: 2px solid #cc0000; }
+  .form-status.is-info { color: var(--smoke); }
+  .form-field input[aria-invalid="true"],
+  .form-field select[aria-invalid="true"],
+  .form-field textarea[aria-invalid="true"] { box-shadow: 0 1px 0 0 #cc0000; }
 
   /* ── FOOTER ── */
   footer {
